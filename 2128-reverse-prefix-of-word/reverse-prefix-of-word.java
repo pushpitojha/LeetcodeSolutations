@@ -1,9 +1,20 @@
 class Solution {
     public String reversePrefix(String word, char ch) {
-        int j = word.indexOf(ch);
-        if (j != -1) {
-            return new StringBuilder(word.substring(0, j + 1)).reverse().toString() + word.substring(j + 1);
+        char[] c = word.toCharArray();
+        int locate = 0;
+        for (int i = 0; i < word.length(); i++) { //first occurrence of ch
+            if (ch == c[i]) {
+                locate = i;
+                break;
+            }
         }
-        return word;
+        char[] res = new char[word.length()];
+        for (int i = 0; i <= locate; i++) {
+            res[i] = c[locate - i];
+        }
+        for (int i = locate + 1; i < word.length(); i++) {
+            res[i] = c[i];
+        }
+        return String.valueOf(res);
     }
 }
